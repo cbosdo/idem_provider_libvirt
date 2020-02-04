@@ -1,8 +1,12 @@
-CLI_CONFIG = {}
+CLI_CONFIG = {
+    'uri': {
+        'default': None,
+        'help': 'libvirt URI to connect to',
+    }
+}
 CONFIG = {}
 GLOBAL = {}
 SUBS = {}
 DYNE = {
-        'virt': ['virt'],
-        'exec': ['exec'],
-       }
+    'exec': ['exec'],
+}
