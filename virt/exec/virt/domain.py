@@ -12,7 +12,7 @@ except ImportError:
 #        return (False, 'Unable to locate or import python libvirt library.')
 #    return 'virt'
 
-def list(hub, connection=None, username=None, password=None):
+async def list(hub, connection=None, username=None, password=None):
     '''
     Return a list of available domains.
 
@@ -30,12 +30,60 @@ def list(hub, connection=None, username=None, password=None):
 
     .. code-block:: bash
 
-        salt '*' virt.list_domains
+        salt '*' virt.list
     '''
     vms = []
     conn = await hub.exec.virt.util.get_conn(connection, username, password)
     try:
         for dom in _get_domain(conn, iterable=True):
+            vms.append(dom.name())
+    finally:
+        conn.close()
+    return vms
+
+
+async def list_active(hub, connection=None, username=None, password=None):
+    '''
+    Return a list of names for active virtual machine on the minion
+
+    :param connection: libvirt connection URI, overriding defaults
+    :param username: username to connect with, overriding defaults
+    :param password: password to connect with, overriding defaults
+
+    CLI Example:
+
+    .. code-block:: bash
+
+        salt '*' virt.list_active
+    '''
+    vms = []
+    conn = await hub.exec.virt.util.get_conn(connection, username, password)
+    try:
+        for dom in _get_domain(conn, iterable=True, inactive=False):
+            vms.append(dom.name())
+    finally:
+        conn.close()
+    return vms
+
+
+async def list_inactive(hub, connection=None, username=None, password=None):
+    '''
+    Return a list of names for inactive virtual machine on the minion
+
+    :param connection: libvirt connection URI, overriding defaults
+    :param username: username to connect with, overriding defaults
+    :param password: password to connect with, overriding defaults
+
+    CLI Example:
+
+    .. code-block:: bash
+
+        salt '*' virt.list_inactive
+    '''
+    vms = []
+    conn = await hub.exec.virt.util.get_conn(connection, username, password)
+    try:
+        for dom in _get_domain(conn, iterable=True, active=False):
             vms.append(dom.name())
     finally:
         conn.close()
