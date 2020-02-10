@@ -3,4 +3,4 @@ import pop.hub
 
 def start():
     hub = pop.hub.Hub()
-    hub.pop.sub.add('idem_provider_libvirt.idem_provider_libvirt')
+    hub.pop.sub.add('virt.virt')

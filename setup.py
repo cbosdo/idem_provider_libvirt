@@ -7,7 +7,7 @@ import sys
 import shutil
 from setuptools import setup, Command
 
-NAME = 'idem_provider_libvirt'
+NAME = 'virt'
 DESC = ('')
 
 # Version info -- read without importing
@@ -71,7 +71,7 @@ setup(name=NAME,
           ],
       entry_points={
         'console_scripts': [
-            'idem_provider_libvirt = idem_provider_libvirt.scripts:start',
+            'virt = virt.scripts:start',
             ],
           },
       packages=discover_packages(),
