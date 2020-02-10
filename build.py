@@ -7,7 +7,7 @@ import tempfile
 import venv
 import argparse
 
-OMIT = ('__pycache__', 'PyInstaller', 'pip', 'setuptools', 'pkg_resources', '__pycache__', 'dist-info', 'egg-info')
+OMIT = ('__pycache__', 'PyInstaller', 'pip', 'setuptools', 'pkg_resources', '__pycache__', 'dist-info', 'egg-info', '.mypy_cache')
 
 
 def parse():
