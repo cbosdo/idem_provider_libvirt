@@ -26,7 +26,7 @@ VIRT_STATE_NAME_MAP = {0: 'running',
 #        return (False, 'Unable to locate or import python libvirt library.')
 #    return 'virt'
 
-async def list(hub, connection=None, username=None, password=None):
+async def list_all(hub, connection=None, username=None, password=None):
     '''
     Return a list of available domains.
 
@@ -191,7 +191,7 @@ async def info(hub, vm_=None, connection=None, username=None, password=None):
     return info
 
 
-def state(hub, vm_=None, connection=None, username=None, password=None):
+async def state(hub, vm_=None, connection=None, username=None, password=None):
     '''
     Return list of all the vms and their state.
 
