@@ -22,6 +22,9 @@ if not SETUP_DIRNAME:
 with open('README.rst', encoding='utf-8') as f:
     LONG_DESC = f.read()
 
+with open('requirements-test.txt') as f:
+    TEST_REQUIREMENTS = f.read().splitlines()
+
 with open('requirements.txt') as f:
     REQUIREMENTS = f.read().splitlines()
 
@@ -57,6 +60,7 @@ setup(name=NAME,
       url='',
       version=VERSION,
       install_requires=REQUIREMENTS,
+      tests_require=TEST_REQUIREMENTS,
       description=DESC,
       long_description=LONG_DESC,
       long_description_content_type='text/x-rst',
