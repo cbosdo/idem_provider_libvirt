@@ -29,5 +29,22 @@ def _hub():
 
 
 @pytest.fixture
-def mock_hub(_hub):
-    return testing.MockHub(_hub)
+def mock_hub(_hub, mock_libvirt_conn):
+    mocked = testing.MockHub(_hub)
+    mocked.exec.virt.util.get_conn.return_value = mock_libvirt_conn
+    return mocked
+
+
+class LibvirtMock(mock.MagicMock):
+    class libvirtError(Exception):
+        '''
+        libvirtError mock
+        '''
+
+@pytest.fixture(scope="session")
+def mock_libvirt_conn():
+    mock_libvirt = LibvirtMock()
+    mock_conn = mock.MagicMock()
+    mock_libvirt.openAuth.return_value = mock_conn
+    sys.modules['libvirt'] = mock_libvirt
+    return mock_conn
